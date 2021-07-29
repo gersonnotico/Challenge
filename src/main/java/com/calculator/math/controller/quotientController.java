@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+
 
 @RestController
 @RequestMapping(value="quotient")
@@ -21,6 +23,7 @@ public class quotientController {
     @GetMapping
     private ResponseEntity quotientNumber(@RequestBody CalculationsDto calculationsDto){
         this.rabbitmqService.sendMessage(RabbitMQConstant.QUOTIENT_NUMBER, calculationsDto);
-        return new ResponseEntity("Result: "+(calculationsDto.a/calculationsDto.b), HttpStatus.OK);
+        BigDecimal quotient = (calculationsDto.a).divide(calculationsDto.b);
+        return new ResponseEntity("Result: "+quotient,HttpStatus.OK);
     }
 }

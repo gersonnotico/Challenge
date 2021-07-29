@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+
 
 @RestController
 @RequestMapping(value="product")
@@ -21,6 +23,7 @@ public class productController {
     @GetMapping
     private ResponseEntity productNumber(@RequestBody CalculationsDto calculationsDto){
         this.rabbitmqService.sendMessage(RabbitMQConstant.PRODUCT_NUMBER, calculationsDto);
-        return new ResponseEntity("Result: "+(calculationsDto.a*calculationsDto.b), HttpStatus.OK);
+        BigDecimal product = (calculationsDto.a).multiply(calculationsDto.b);
+        return new ResponseEntity("Result: "+product,HttpStatus.OK);
     }
 }

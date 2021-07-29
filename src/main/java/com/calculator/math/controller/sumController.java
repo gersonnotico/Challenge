@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+
 @RestController
 @RequestMapping(value="sum")
 public class sumController {
@@ -19,6 +21,7 @@ public class sumController {
     @GetMapping
     private ResponseEntity sumNumber(@RequestBody CalculationsDto calculationsDto){
         this.rabbitmqService.sendMessage(RabbitMQConstant.SUM_NUMBER, calculationsDto);
-        return new ResponseEntity("Result: "+(calculationsDto.a+calculationsDto.b),HttpStatus.OK);
+        BigDecimal sum = (calculationsDto.a).add(calculationsDto.b);
+        return new ResponseEntity("Result: "+sum,HttpStatus.OK);
     }
 }

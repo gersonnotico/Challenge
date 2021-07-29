@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+
 
 @RestController
 @RequestMapping(value="difference")
@@ -21,6 +23,7 @@ public class differenceController {
     @GetMapping
     private ResponseEntity differenceNumber(@RequestBody CalculationsDto calculationsDto){
         this.rabbitmqService.sendMessage(RabbitMQConstant.DIFFERENCE_NUMBER, calculationsDto);
-        return new ResponseEntity("Result: "+(calculationsDto.a-calculationsDto.b), HttpStatus.OK);
+        BigDecimal difference = (calculationsDto.a).subtract(calculationsDto.b);
+        return new ResponseEntity("Result: "+difference,HttpStatus.OK);
     }
 }
