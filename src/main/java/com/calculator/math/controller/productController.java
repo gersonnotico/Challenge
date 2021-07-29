@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping(value="multiplication")
-public class multiplicationController {
+@RequestMapping(value="product")
+public class productController {
     @Autowired
     private RabbitmqService rabbitmqService;
 
     @GetMapping
-    private ResponseEntity multiplicationNumber(@RequestBody CalculationsDto calculationsDto){
-        this.rabbitmqService.sendMessage(RabbitMQConstant.MUL_NUMBER, calculationsDto);
+    private ResponseEntity productNumber(@RequestBody CalculationsDto calculationsDto){
+        this.rabbitmqService.sendMessage(RabbitMQConstant.PRODUCT_NUMBER, calculationsDto);
         return new ResponseEntity("Result: "+(calculationsDto.a*calculationsDto.b), HttpStatus.OK);
     }
 }

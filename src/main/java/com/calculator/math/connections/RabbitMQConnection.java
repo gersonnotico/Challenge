@@ -34,9 +34,9 @@ public class RabbitMQConnection {
     @PostConstruct
     private void add(){
         Queue sumNumber = this.row(RabbitMQConstant.SUM_NUMBER);
-        Queue subNumber = this.row(RabbitMQConstant.SUB_NUMBER);
-        Queue mulNumber = this.row(RabbitMQConstant.MUL_NUMBER);
-        Queue divNumber = this.row(RabbitMQConstant.DIV_NUMBER);
+        Queue subNumber = this.row(RabbitMQConstant.DIFFERENCE_NUMBER);
+        Queue mulNumber = this.row(RabbitMQConstant.PRODUCT_NUMBER);
+        Queue divNumber = this.row(RabbitMQConstant.QUOTIENT_NUMBER);
 
         DirectExchange exchange = this.directChange();
 

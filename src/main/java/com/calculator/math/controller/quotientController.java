@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping(value="subtraction")
-public class subtractionController {
+@RequestMapping(value="quotient")
+public class quotientController {
     @Autowired
     private RabbitmqService rabbitmqService;
 
     @GetMapping
-    private ResponseEntity subtractionNumber(@RequestBody CalculationsDto calculationsDto){
-        this.rabbitmqService.sendMessage(RabbitMQConstant.SUB_NUMBER, calculationsDto);
-        return new ResponseEntity("Result: "+(calculationsDto.a-calculationsDto.b), HttpStatus.OK);
+    private ResponseEntity quotientNumber(@RequestBody CalculationsDto calculationsDto){
+        this.rabbitmqService.sendMessage(RabbitMQConstant.QUOTIENT_NUMBER, calculationsDto);
+        return new ResponseEntity("Result: "+(calculationsDto.a/calculationsDto.b), HttpStatus.OK);
     }
 }

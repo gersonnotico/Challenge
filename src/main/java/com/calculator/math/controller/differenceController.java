@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping(value="division")
-public class divisionController {
+@RequestMapping(value="difference")
+public class differenceController {
     @Autowired
     private RabbitmqService rabbitmqService;
 
     @GetMapping
-    private ResponseEntity divisionNumber(@RequestBody CalculationsDto calculationsDto){
-        this.rabbitmqService.sendMessage(RabbitMQConstant.DIV_NUMBER, calculationsDto);
-        return new ResponseEntity("Result: "+(calculationsDto.a/calculationsDto.b), HttpStatus.OK);
+    private ResponseEntity differenceNumber(@RequestBody CalculationsDto calculationsDto){
+        this.rabbitmqService.sendMessage(RabbitMQConstant.DIFFERENCE_NUMBER, calculationsDto);
+        return new ResponseEntity("Result: "+(calculationsDto.a-calculationsDto.b), HttpStatus.OK);
     }
 }
